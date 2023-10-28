@@ -1,0 +1,1 @@
+bin_node("a",bin_node("b",bin_node("c",None,None),None),bin_node("h",bin_node("b",None,None),None))
