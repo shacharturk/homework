@@ -1,15 +1,5 @@
 import random
 
-"""""
-def sort(iterable):
-    result = []
-    for i in iterable:
-        if i == "B":
-            result += "B"
-            iterable.remove(i)
-    result += iterable
-    return result
-"""
 
 def shuffle(iterable):
     result = []
@@ -31,19 +21,26 @@ class BullsCode:
             #print(int(*code))
         self.code = code
 
+    def get_answer(self):
+        return self.code
     def check(self, guess):
+        code = self.code
         score = []
         potential = []
         for i in range(0, len(guess)):
+            if code == "":
+                break
             if self.code[i] == guess[i]:
                 char = self.code[i]
-                self.code.replace(char, "")
+                code = code.replace(char, "")
+                print(f"code: {code}, b, {guess[i]}")
                 score += "B"
+
                 if char in potential:
-                    if char not in self.code:
+                    if char not in code:
                         potential.remove(char)
                         score.remove("C")
-            elif guess[i] in self.code:
+            elif guess[i] in code and potential.count(guess[i]) < code.count(guess[i]):
                 potential += guess[i]
                 score += "C"
         return shuffle(score)
